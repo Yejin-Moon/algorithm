@@ -8,19 +8,30 @@ private:
     string name;
     T height;
 public:
-    Person(string name, T height):name(name),height(height){}
-
-    void printAll(){
-        cout<<"name: "<<name<<endl;
-        cout<<"number: "<<height<<endl;
-    };
-    void setName(string name){
-        this->name = name;
-    }
-    void setNumber(T height){
-        this->height = height;
-    }
+    Person(string name, T height);
+    void printAll();
+    void setName(string name);
+    void setNumber(T height);
 };
+
+template <class T>
+Person<T>::Person(string name, T height):name(name), height(height){}
+
+template <class T>
+void Person<T>::printAll(){
+    cout<<"name: "<<name<<endl;
+    cout<<"number: "<<height<<endl;
+};
+
+template <typename T>
+void Person<T>::setName(string name){
+    this->name = name;
+}
+
+template <typename T>
+void Person<T>::setNumber(T height){
+    this->height=height;
+}
 
 int main()
 {
