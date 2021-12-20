@@ -3,17 +3,29 @@
 
 using namespace std;
 
-int main()
-{
-    vector<int> vec_a; //이름만 선언
-    vector<int> vec_b(10); //크기를 10으로 선언
-    vector<int> vec_c(10,8); //크기 10, 초기화 8
-    vector<int> vec_d{10,20,30,40}; //4개 요소로 벡터 생성
-
-    for(int i : vec_c)
-    {
-        cout << i << '\t';
+void print(vector<int>& v){
+    for(unsigned int i = 0; i<v.size(); i++){
+        cout << v[i] << '\t';
     }
     cout<<endl;
+}
+
+int main()
+{
+    vector<int> v{10,20,30};
+
+    cout<<"Changing the value"<<endl;
+    cout<<v[0]<<", "<<v[1]<<endl;
+    v[0]=1000;
+    cout<<v[0]<<", "<<v[1]<<endl;
+
+    cout<<"push back"<<endl;
+    v.push_back(2000);
+    print(v);
+
+    cout<<"pop back"<<endl;
+    v.pop_back();
+    print(v);
+    
     return 0;
 }
