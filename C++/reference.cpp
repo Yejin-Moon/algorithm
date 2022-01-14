@@ -3,19 +3,17 @@ using namespace std;
 
 int main()
 {
-    int num1=1024;
-    int &num2 = num1;
+    int num = 12;
+    int *ptr = &num;
+    int **dptr = &ptr;
 
-    cout<<"Before Change"<<endl;
-    cout<<num1<<endl;
-    cout<<num2<<endl;
-
-    num2 = 3000;
-
-    cout<<"After Change"<<endl;
-
-    cout<<num1<<endl;
-    cout<<num2<<endl;
+    cout<<&ptr<<endl;
+    cout<<ptr<<endl;
+    cout<<*ptr<<endl;
+    cout<<&dptr<<endl;
+    cout<<dptr<<endl;
+    cout<<*dptr<<endl;
+    cout<<**dptr<<endl;
 }
 
 
