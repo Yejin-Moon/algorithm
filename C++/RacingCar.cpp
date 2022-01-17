@@ -1,15 +1,21 @@
 #include <iostream>
 using namespace std;
 
-#define ID_LEN  20
-#define MAX_SPD 200
-#define FUEL_STEP   2
-#define ACC_STEP    10
-#define BRK_STEP    10
+namespace CAR_CONST
+{
+    enum
+    {
+        ID_LEN      =20,
+        MAX_SPD     =200,
+        FUEL_STEP   =2,
+        ACC_STEP    =10,
+        BRK_STEP    =10
+    };
+}
 
 struct Car
 {
-    char gamerID[ID_LEN];
+    char gamerID[CAR_CONST::ID_LEN];
     int fuelGauge;
     int curSpeed;
 
@@ -28,25 +34,25 @@ struct Car
         }
         else
         {
-            car.fuelGauge-=FUEL_STEP;
+            car.fuelGauge-=CAR_CONST::FUEL_STEP;
         }
 
-        if(car.curSpeed+ACC_STEP>=MAX_SPD)
+        if(car.curSpeed+CAR_CONST::ACC_STEP>=CAR_CONST::MAX_SPD)
         {
-            car.curSpeed=MAX_SPD;
+            car.curSpeed=CAR_CONST::MAX_SPD;
             return;
         }
-        car.curSpeed+-ACC_STEP;
+        car.curSpeed+-CAR_CONST::ACC_STEP;
     }
 
     void Break(Car &car)
     {
-        if(car.curSpeed<BRK_STEP)
+        if(car.curSpeed<CAR_CONST::BRK_STEP)
         {
             car.curSpeed=0;
             return;
         }
-        car.curSpeed-=BRK_STEP;
+        car.curSpeed-=CAR_CONST::BRK_STEP;
     }
 };
 
