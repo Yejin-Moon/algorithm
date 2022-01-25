@@ -17,12 +17,17 @@ public:
     }
     int SaleApples(int money)
     {
+        if(money < 0)
+        {
+            cout<<"Wrong information!"<<endl;
+            return 0;
+        }
         int num = money/APPLE_PRICE;
         numOfApples-=num;
         myMoney+=money;
         return num;
     }
-    void ShowSalesResult()
+    void ShowSalesResult() const
     {
         cout<<"remaining apples : "<<numOfApples<<endl;
         cout<<"revenue from sales : "<<myMoney<<endl;
@@ -42,10 +47,15 @@ public:
     }
     void BuyApples(FruitSeller &seller, int money)
     {
+        if(money < 0)
+        {
+            cout<<"Wrong information!"<<endl;
+            return;
+        }
         numOfApples+=seller.SaleApples(money);
         myMoney-=money;
     }
-    void ShowBuyResult()
+    void ShowBuyResult() const
     {
         cout<<"current money : "<<myMoney<<endl;
         cout<<"the number of apples : "<<numOfApples<<endl<<endl;
