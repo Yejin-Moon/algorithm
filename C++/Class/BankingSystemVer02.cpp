@@ -56,3 +56,64 @@ public:
 
 Account * accArr[100];
 int accNum = 0;
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        ShowMenu();
+        cout<<"Choice: ";
+        cin>>choice;
+        cout<<endl;
+
+        switch(choice)
+        {
+        case MAKE:
+            MakeAccount();
+            break;
+        case DEPOSIT:
+            DepositMoney();
+            break;
+        case WITHDRAW:
+            WithdrawMoney();
+            break;
+        case INQUIRE:
+            ShowAccInfo();
+            break;
+        case EXIT:
+            for(int i = 0; i<accNum; i++)
+                delete accArr[i];
+            return 0;
+        default:
+            cout<<"Illegal selection.."<<endl;
+        }
+    }
+    return 0;
+}
+
+void ShowMenu()
+{
+    cout<<"-----Menu-----"<<endl;
+    cout<<"1. Create account"<<endl;
+    cout<<"2. Deposit"<<endl;
+    cout<<"3. Withdraw"<<endl;
+    cout<<"4. Print account info"<<endl;
+    cout<<"5. Exit program"<<endl;
+}
+
+void MakeAccount()
+{
+    int id;
+    char name[NAME_LEN];
+    int balance;
+
+    cout<<"[Create account]"<<endl;
+    cout<<"Account ID: "; cin>>id;
+    cout<<"Name: "; cin>>name;
+    cout<<"Deposit: "; cin>>balance;
+    cout<<endl;
+
+    accArr[accNum++]=new Account(id, balance, name);
+}
