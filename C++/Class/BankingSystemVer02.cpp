@@ -117,3 +117,56 @@ void MakeAccount()
 
     accArr[accNum++]=new Account(id, balance, name);
 }
+
+void DepositMoney()
+{
+    int money;
+    int id;
+    cout<<"[Deposit]"<<endl;
+    cout<<"Account ID: "; cin>>id;
+    cout<<"Deposit: "; cin>>money;
+
+    for(int i = 0; i< accNum; i++)
+    {
+        if(accArr[i]->GetAccID()==id)
+        {
+            accArr[i]->Deposit(money);
+            cout<<"Deposit complete"<<endl<<endl;
+            return;
+        }
+    }
+    cout<<"invalid id"<<endl<<endl;
+}
+
+void WithdrawMoney()
+{
+    int money;
+    int id;
+    cout<<"[Withdraw]"<<endl;
+    cout<<"Account ID: "; cin>>id;
+    cout<<"Withdraw: "; cin>>money;
+
+    for(int i = 0; i< accNum; i++)
+    {
+        if(accArr[i]->GetAccID()==id)
+        {
+            if(accArr[i]->Withdraw(money)==0)
+            {
+                cout<<"no balance"<<endl<<endl;
+                return;
+            }
+            cout<<"Withdraw complete"<<endl<<endl;
+            return;
+        }
+    }
+    cout<<"invalid id"<<endl<<endl;
+}
+
+void ShowAccInfo()
+{
+    for(int i = 0; i<accNum;i++)
+    {
+        accArr[i]->ShowAccInfo();
+        cout<<endl;
+    }
+}
