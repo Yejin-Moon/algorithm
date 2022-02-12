@@ -1,13 +1,6 @@
 #include <iostream>
+#include "infohiding.h"
 using namespace std;
-
-class AAA
-{
-private:
-    int num;
-public:
-    void setNum(int n) { num = n; }
-    int getNum() {return num;}
 
 void AAA::setNum(int n)
 {
@@ -18,4 +11,11 @@ void AAA::setNum(int n)
     }
     num=n;
 }
-};
+
+int AAA::getNum()
+{
+    int a;
+    cout<<"Enter a number: ";
+    cin>>a;
+    return a;
+}

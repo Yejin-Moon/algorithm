@@ -6,7 +6,7 @@ class AAA
 private:
     int num;
 public:
-    void setNum(int n) { num = n; }
-    int getNum() {return num;}
+    void setNum(int n);
+    int getNum();
 };
 #endif
