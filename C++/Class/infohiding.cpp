@@ -9,6 +9,11 @@ void AAA::setNum(int n)
         cout<<"error"<<endl;
         return;
     }
+    if(n>='A' && n<='z')
+    {
+        cout<<"Enter a number!"<<endl;
+        return;
+    }
     num=n;
 }
 
