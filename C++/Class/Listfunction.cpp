@@ -34,4 +34,9 @@ int main()
         cout<<ele<<" ";
     }
     cout<<endl;
+
+    list1.unique([](int a, int b){ return (b-a)<2;});
+    for(auto &ele:list1)
+        cout<<ele<<" ";
+    cout<<endl;
 }
