@@ -2,7 +2,7 @@
 #include <array>
 using namespace std;
 
-int main()
+/*int main()
 {
     array<int, 4> arr = {1,2,3,4};
 
@@ -16,4 +16,19 @@ int main()
         std::cerr << e.what() << '\n';
     }
     
+}
+*/
+template <size_t N>
+void print(const array<int, N>& arr);
+
+void print(array<int,5> arr)
+{
+    for (auto ele:arr)
+        cout<<ele<<" ";
+}
+
+int main()
+{
+    array<int, 5> arr = {1,2,3,4,5};
+    print(arr);
 }
