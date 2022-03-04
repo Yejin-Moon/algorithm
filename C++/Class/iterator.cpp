@@ -1,6 +1,7 @@
 #include <iostream>
 #include <forward_list>
 #include <vector>
+#include <string>
 
 using namespace std;
 
