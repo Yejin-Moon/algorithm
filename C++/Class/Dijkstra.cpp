@@ -31,3 +31,30 @@ vector<int> dijkstra(int start, int V, vector<pair<int,int>> adj[]) {
     }
     return dist;
 }
+
+int main()
+{
+    int V,E;
+    vector<pair<int, int>> adj[MAX];
+    cout<<"Enter the number of nodes : ";
+    cin>>V;
+    cout<<"Enter the number of Edges : ";
+    cin>>E;
+
+    for (int i = 0; i<E;i++)
+    {
+        int from, to, cost;
+        cout<<"Enter the graph: ";
+        cin>>from>>to>>cost;
+        adj[from].push_back(make_pair(to,cost));
+        adj[to].push_back(make_pair(from, cost));
+    }
+
+    printf("Result\n");
+    vector<int>dist = dijkstra(0,V,adj);
+    for(int i = 0; i< V; i++)
+    {
+        printf("Shortest distance (0 node to %d node) : %d\n", i,dist[i]);
+    }
+    return 0;
+}
