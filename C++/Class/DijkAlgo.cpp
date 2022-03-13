@@ -52,3 +52,31 @@ void dijkstra(int start)
         }
     }
 }
+
+int main()
+{
+    cin>>n>>m>>start;
+
+    for(int i = 0; i < m; i++)
+    {
+        int a, b, c;
+        cin >> a>> b>> c;
+
+        graph[a].push_back({b,c});
+    }
+    fill_n(d,100001,INF);
+    dijkstra(start);
+
+    for(int i = 1; i<=n; i++)
+    {
+        if(d[i]==INF)
+        {
+            cout<<"INF"<<'n';
+        }
+        else
+        {
+            cout<<d[i]<<'\n';
+        }
+    }
+    return 0;
+}
