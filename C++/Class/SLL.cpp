@@ -99,5 +99,63 @@ public:
 
             delete deleteNode;
         }
+
+        void insertNode(T data, int index)
+        {
+            if(index > size || index < 0)
+            {
+                cout<<"invalid index : "<< index<<endl;
+                return;
+            }
+
+            Node<T>* newNode = new Node<T>(data);
+
+            if(index ==0)
+            {
+                if(head == NULL)
+                {
+                    tail = newNode;
+                }
+                newNode -> nextNode =head;
+                head = newNode;
+            }
+            else if(index == size)
+            {
+                if(head == NULL)
+                {
+                    head = tail = newNode;
+                }
+                else
+                {
+                    tail->nextNode = newNode;
+                    tail = newNode;
+                }
+            }
+            else
+            {
+                Node<T>* findNode = head;
+                Node<T>* nextNode = findNode -> nextNode;
+
+                for(int i=1; i<index; ++i)
+                {
+                    findNode = nextNode;
+                    nextNode = findNode->nextNode;
+                }
+                newNode->nextNode = nextNode;
+                findNode->nextNode = newNode;
+            }
+            ++size;
+        }
+    }
+    void showList() const
+    {
+        Node<T>* findNode = head;
+        cout<<"size of SLL : "<<size<<endl;
+        while(findNode != NULL)
+        {
+            cout<<findNode ->data<<" ";
+            findNode = findNode->nextNode;
+        }
+        cout<<endl;
     }
 };
