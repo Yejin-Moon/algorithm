@@ -192,5 +192,44 @@ public:
             }
             return;
         }
+        else
+        {
+            Node* tmp;
+            cursor = deleteTarget->right;
+            if(cursor->left)
+            {
+                while(cursor->left)
+                {
+                    tmp = cursor;
+                    cursor = cursor->left;
+                }
+                int tmpValue = tmp->left->value;
+                tmp->left->value = deleteTarget->value;
+                deleteTarget->value = tmpValue;
+
+                delete tmp->left;
+                tmp->left = nullptr;
+            }
+            else if(cursor->right)
+            {
+                while(cursor->right)
+                {
+                    tmp = cursor;
+                    cursor = cursor->right;
+                }
+                int tmpValue = tmp->right->value;
+                tmp->right->value = deleteTarget->value;
+                deleteTarget->value - tmpValue;
+
+                delete tmp->right;
+                tmp->right = nullptr;
+            }
+            return;
+        }
+    }
+    void printTree()
+    {
+        this->_preorderTraversal(this->root);
+        cout<<endl;
     }
 };
