@@ -65,4 +65,132 @@ private:
             cout<<"Already exists."<<endl;
         }
     }
+
+    void _preorderTraversal(Node* cursor)
+    {
+        if(!cursor)
+        {
+            return;
+        }
+        cout<<cursor->value<<" ";
+        this->_preorderTraversal(cursor->left);
+        this->_preorderTraversal(cursor->right);
+    }
+
+public:
+    void insert(const int& value)
+    {
+        if(!this->root)
+        {
+            this->root = new Node(value);
+            return;
+        }
+        this->_insert(this->root, value);
+    }
+
+    Node* find(const int& value)
+    {
+        Node* cursor = this->root;
+        if(!cursor)
+        {
+            return nullptr;
+        }
+        return this->_find(cursor, value);
+    }
+
+    void remove(const int& value)
+    {
+        Node* parent;
+        Node* deleteTarget;
+        Node* cursor = this->root;
+        while(cursor)
+        {
+            if(cursor->left)
+            {
+                if(cursor->left->value == value)
+                {
+                    parent = cursor;
+                }
+            }
+            else if(cursor->right)
+            {
+                if(cursor->right->value == value)
+                {
+                    parent = cursor;
+                }
+            }
+
+            if(cursor->value == value)
+            {
+                deleteTarget = cursor;
+                break;
+            }
+            else if(cursor->value > value)
+            {
+                cursor = cursor->left;
+            }
+            else
+            {
+                cursor = cursor->right;
+            }
+        }
+
+        if(deleteTarget->right == nullptr && deleteTarget->left == nullptr)
+        {
+            if(parent->left == deleteTarget)
+            {
+                parent->left = nullptr;
+            }
+            else if(parent->right == deleteTarget)
+            {
+                parent->right = nullptr;
+            }
+            delete deleteTarget;
+            return;
+        }
+
+        if(deleteTarget->right == nullptr && deleteTarget->left != nullptr)
+        {
+            if(!parent)
+            {
+                this->root = deleteTarget->left;
+                delete deleteTarget;
+            }
+            else
+            {
+                if(parent->left == deleteTarget)
+                {
+                    parent->left = parent->left->left;
+                }
+                else if(parent->right == deleteTarget)
+                {
+                    parent->right = parent->right->left;
+                }
+                delete deleteTarget;
+            }
+            return;
+        }
+
+        else if(deleteTarget->right != nullptr && deleteTarget->left == nullptr)
+        {
+            if(!parent)
+            {
+                this->root = deleteTarget->right;
+                delete deleteTarget;
+            }
+            else
+            {
+                if(parent->left == deleteTarget)
+                {
+                    parent->left = parent->left->right;
+                }
+                else if(parent->right == deleteTarget)
+                {
+                    parent->right = parent->right->right;
+                }
+                delete deleteTarget;
+            }
+            return;
+        }
+    }
 };
