@@ -6,12 +6,13 @@ int main()
 {
     int n;
     cin>>n;
-    int arr[100];
+    //int arr[100];
+    vector<int> arr;
     for(int j=0; j<n; j++)
     {
         int a;
         cin>>a;
-        arr[j]=a;
+        arr.push_back(a);
     }
     for(int i=0; i<n; i++)
     {
