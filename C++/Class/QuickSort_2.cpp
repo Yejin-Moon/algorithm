@@ -36,9 +36,10 @@ void QuickSort(int *arr, int n)
 
 int main()
 {
-    int arr[6] = {6,5,4,3,2,1};
+    int arr[10] = {5,4,3,2,1,1,4,3,5,7};
     origin = arr;
-    on = 6;
+    on = sizeof(arr)/4;
+
     QuickSort(arr,on);
 
     for(int i=0; i<on; i++)
