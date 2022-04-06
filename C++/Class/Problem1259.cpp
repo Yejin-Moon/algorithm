@@ -21,6 +21,7 @@ int main()
             {
                 cout<<"no"<<endl;
                 flag=1;
+                break;
             }
         }
         if(flag!=1) cout<<"yes"<<endl;
