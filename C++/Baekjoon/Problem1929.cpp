@@ -3,7 +3,6 @@ using namespace std;
 
 void Eratos(int m, int n)
 {
-    if(n<=m) return;
     bool* PrimeArray = new bool[n+1];
 
     for(int i=2; i<=n; i++)
@@ -18,7 +17,7 @@ void Eratos(int m, int n)
         }
     }
     PrimeArray[1]=false;
-    for(int i=m; i<n; i++)
+    for(int i=m; i<=n; i++)
     {
         if(PrimeArray[i]) cout<<i<<'\n';
     }
