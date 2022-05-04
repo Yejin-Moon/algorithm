@@ -12,6 +12,11 @@ int main()
         int a,b;
         a = p%h;
         b = p/h+1;
+        if(p%h==0)
+        {
+            a = h;
+            b = b-1;
+        }
 
         cout<<a*100+b<<'\n';
     }
