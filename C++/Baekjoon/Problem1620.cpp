@@ -9,6 +9,9 @@ string m2[100001];
 
 int main()
 {
+    ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
     int n,m;
     cin>>n>>m;
     char str[21];
@@ -25,7 +28,7 @@ int main()
     for(int i=0; i<m; i++)
     {
         cin>>str;
-        if(str[0]>'0' && str[0]<'9')
+        if(str[0]>='0' && str[0]<='9')
         {
             int a;
             sscanf(str,"%d",&a);
