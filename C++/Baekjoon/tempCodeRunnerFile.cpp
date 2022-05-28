@@ -1,18 +1,31 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main()
 {
-    int n;
-    cin>>n;
-    for(int i=0; i<n; i++)
-    {
-        int h,w,p;
-        cin>>h>>w>>p;
-        int a,b;
-        a = p%h;
-        b = p/h+1;
+    string s;
+    string a;
 
-        cout<<a*100+b<<'\n';
+    getline(cin,s);
+    getline(cin,a);
+    int cnt=0;
+    s[s.length()-1] = 0;
+
+    for(int i=0; i<s.length(); i++)
+    {
+        if(a[0]==s[i])
+        {
+            for(int j=1; j<a.length(); j++)
+            {
+                i++;
+                if(i==s.length()-1) goto EXIT;
+                if(a[j]!=s[i]) break;
+            }
+            cnt++;
+        }
     }
+    goto EXIT;
+EXIT:
+    cout<<cnt;
 }
