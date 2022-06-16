@@ -48,6 +48,11 @@ void addToHeap(int v, int last)
     int parent = cur/2;
     arr[cur]=v;
 
+    if(last==1 && v<0) 
+    {
+        arr[1]=v;
+        return;
+    }
     while(1)
     {
         if(arr[parent]>arr[cur])
@@ -80,16 +85,23 @@ int main()
     
     int n;
     scanf("%d",&n);
+    if(n==1)
+    {
+        int l;
+        scanf("%d",&l);
+        printf("%d",l);
+        return 0;
+    }
     for(int i=1; i<=n*n; i++)
     {
-        long long a;
-        scanf("%lld",&a);
+        int a;
+        scanf("%d",&a);
         addToHeap(a,i);
     }
     heapify(n*n);
     for(int i=0; i<n; i++)
     {
         int k = removeRoot(n*n-i);
-        if(i==n-1) printf("%lld",k);
+        if(i==n-1) printf("%d",k);
     }
 }
