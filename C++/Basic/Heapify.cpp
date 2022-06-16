@@ -43,9 +43,46 @@ void heapify(int last)
     }
 }
 
+void addToHeap(int v, int last)
+{
+    int cur = last +1;
+    int parent = cur/2;
+    arr[cur] = v;
+
+    while(1)
+    {
+        if(arr[parent]>arr[cur])
+        {
+            return;
+        }
+        else
+        {
+            myswap(parent, cur);
+            cur=parent;
+            parent=cur/2;
+            if(parent<1) return;
+        }
+    }
+}
+
+int removeRoot(int last)
+{
+    int ret = arr[1];
+    arr[1]= arr[last];
+    findlocation(1,last-1);
+    return ret;
+}
+
 int main()
 {
+    int k;
     cout<<arr[1]<<endl;
     heapify(7);
+    cout<<arr[1]<<endl;
+    addToHeap(30,7);
+    cout<<arr[1]<<endl;
+    addToHeap(40,8);
+    cout<<arr[1]<<endl;
+    k=removeRoot(8);
     cout<<arr[1]<<endl;
 }
