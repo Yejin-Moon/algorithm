@@ -85,13 +85,7 @@ int main()
     
     int n;
     scanf("%d",&n);
-    if(n==1)
-    {
-        int l;
-        scanf("%d",&l);
-        printf("%d",l);
-        return 0;
-    }
+
     for(int i=1; i<=n*n; i++)
     {
         int a;
