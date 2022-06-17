@@ -1,41 +1,35 @@
 #include <iostream>
-#include <queue>
-#include <cmath>
 using namespace std;
 
-struct cmp
+int rcnt[51];
+int ccnt[51];
+
+int max(int a, int b)
 {
-    bool operator()(int n1, int n2)
-    {
-        if(abs(n1)>abs(n2)) return true;
-        else if(abs(n1)==abs(n2))
-        {
-            if(n1>n2) return true;
-            else return false;
-        }
-        return false;
-    }
-};
+    if(a>b) return a;
+    else return b;
+}
 
 int main()
 {
-    priority_queue<int, vector<int>,cmp> pq;
-    int n;
-    cin>>n;
+    int n,m;
+    cin>>n>>m;
 
     for(int i=0; i<n; i++)
     {
-        int a;
-        cin>>a;
-        if(a==0)
+        for(int j=0; j<m; j++)
         {
-            if(pq.empty()) cout<<"0"<<'\n';
-            else 
+            char c;
+            cin>>c;
+            if(c!='.')
             {
-                cout<<pq.top()<<'\n';
-                pq.pop();
+                rcnt[i]=1;
+                ccnt[j]=1;
             }
         }
-        else pq.push(a);
     }
+    int rsum=0, csum=0;
+    for(int i=0; i<n; i++) rsum+=rcnt[i];
+    for(int j=0; j<m; j++) csum+=ccnt[j];
+    cout<<max(n-rsum, m-csum);
 }
