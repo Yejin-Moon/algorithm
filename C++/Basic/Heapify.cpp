@@ -76,13 +76,13 @@ int removeRoot(int last)
 int main()
 {
     int k;
-    cout<<arr[1]<<endl;
+    cout<<arr[1]<<endl; //6(힙으로 만들기 전 루트)
     heapify(7);
-    cout<<arr[1]<<endl;
+    cout<<arr[1]<<endl; //10(Max heap이므로 가장 큰 수가 루트)
     addToHeap(30,7);
-    cout<<arr[1]<<endl;
+    cout<<arr[1]<<endl; //30(10보다 큰 30이 추가되었으므로)
     addToHeap(40,8);
-    cout<<arr[1]<<endl;
+    cout<<arr[1]<<endl; //40(30보다 큰 40이 추가되었으므로)
     k=removeRoot(8);
-    cout<<arr[1]<<endl;
+    cout<<arr[1]<<endl; //30(루트에 있던 40이 제거됨)
 }
