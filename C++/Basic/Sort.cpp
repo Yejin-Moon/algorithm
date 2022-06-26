@@ -64,3 +64,39 @@ int main()
     }
 }
 */
+
+/*
+//퀵소트
+int quick[5] = {5,4,3,2,1};
+
+void quicksort(int i, int j)
+{
+    if(i>=j) return;
+    int pivot = i;
+    int left = i+1;
+    int right = j;
+
+    while(left<=right)
+    {
+        while(left<=j && quick[left]<quick[pivot]) left++;
+        while(right>i && quick[right]>quick[pivot]) right--;
+        if(left<=right) //크로스되지 않음
+        {
+            swap(quick[left],quick[right]);
+            left++,right--;
+        }
+        else swap(quick[right],quick[pivot]); //left와 right 크로스
+    }
+    quicksort(i,right);
+    quicksort(left,j);
+}
+
+int main()
+{
+    quicksort(0,4);
+    for(auto i:quick)
+    {
+        cout<<i<<" ";
+    }
+}
+*/
