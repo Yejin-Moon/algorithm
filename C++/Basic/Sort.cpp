@@ -100,3 +100,50 @@ int main()
     }
 }
 */
+
+/*
+//병합 정렬
+int sorted[5];
+void merge(int *arr, int first, int mid, int last)
+{
+    int i=first;
+    int j=mid+1;
+    int k=0;
+
+    while(i<=mid && j<=last)
+    {
+        if(arr[i]<=arr[j]) sorted[k++] = arr[i++];
+        else sorted[k++] = arr[j++];
+    }
+    if(i>mid)
+    {
+        while(j<=last) sorted[k++] = arr[j++];
+    }
+    else
+    {
+        while(i<=mid) sorted[k++] = arr[i++];
+    }
+    for(i=first, k=0; i<=last; i++,k++) arr[i]=sorted[k];//정렬된 배열 삽입
+}
+
+void mergesort(int *arr, int first, int last)
+{
+    if(first<last)
+    {
+        int mid = (first+last)/2;
+        mergesort(arr,first,mid);
+        mergesort(arr,mid+1,last);
+        merge(arr,first,mid,last);
+    }
+}
+
+int main()
+{
+    int arr[5] = {5,4,3,2,1};
+    mergesort(arr,0,4);
+    for(int i:arr)
+    {
+        cout<<i<<" ";
+    }
+}
+*/
