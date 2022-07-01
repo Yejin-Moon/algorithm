@@ -20,11 +20,12 @@ int main()
 
     for(int i=0; i<n; i++)
     {
-        v[i]=v[i]-b;
+        long tmp;
+        tmp=v[i]-b;
         ans++;
-        if(v[i]<=0) continue;
-        v[i]=ceil(v[i]/c);
-        ans+=v[i];
+        if(tmp<=0) continue;
+        tmp=ceil(tmp/c);
+        ans+=tmp;
     }
     cout<<ans;
 }
