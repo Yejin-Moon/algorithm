@@ -9,7 +9,7 @@ int main()
     cin>>s;
     sort(s.rbegin(),s.rend());
     int len = s.length();
-    if(s[len-1]!='0') cout<<"-1";
+    if(s[len-1]!='0') cout<<-1;
     else
     {
         long long num=0;
@@ -18,6 +18,6 @@ int main()
             num+=s[i]-'0';
         }
         if(num%3==0) cout<<s;
-        else cout<<"-1";
+        else cout<<-1;
     }
 }
