@@ -3,11 +3,11 @@
 using namespace std;
 
 int w;
-bool visited[100][100];
-int map[100][100];
+bool visited[105][105];
+int map[105][105];
 
 int dx[4] = {0,1,0,-1};
-int dy[4] = {-1,0,1,0};
+int dy[4] = {1,0,-1,0};
 
 int maxval = 1;
 int cnt=0;
