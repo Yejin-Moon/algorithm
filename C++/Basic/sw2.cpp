@@ -110,11 +110,11 @@ typedef struct node
     char mGender;
     int mScore;
     struct node*next;
+    struct node*prev;
 }node;
 
 node*head[6]={0,0,0,0,0,0};
-node*cur[6]={0,0,0,0,0,0};
-node*p[6];
+int big[6]={0,0,0,0,0,0};
 
 int retidx(int mGrade, char mGender)
 {
@@ -132,63 +132,69 @@ int retidx(int mGrade, char mGender)
     }
 }
 
-int add(int id, int grade, char gender[7], int score)
-{
+int add(int mId, int mGrade, char mGender[7], int mScore) {
     node*newnode = (node*)malloc(sizeof(node));
-    newnode->mId=id;
-    newnode->mGrade=grade;
-    newnode->mGender=gender[0];
-    newnode->mScore=score;
-    newnode->next=0;
+    newnode->mId=mId;
+    newnode->mGrade=mGrade;
+    newnode->mGender=mGender[0];
+    newnode->mScore=mScore;
+    newnode->next=newnode->prev = 0;
 
-    int idx = retidx(grade,gender[0]);
+    int idx = retidx(mGrade,mGender[0]);
 
     if(head[idx]==0)
     {
         head[idx]=newnode;
-        cur[idx]=head[idx];
-        return id;
+        big[idx] = mScore;
+        return mId;
     }
+    if(mScore>big[idx]) big[idx]=mScore;
     node*tmp = head[idx];
-    while(tmp->mScore<score&&tmp->next!=0)
+    while(1)
     {
-        tmp=tmp->next;
+        if(tmp==0) break;
+        if(tmp->mScore<mScore) tmp=tmp->next;
+        else break;
+        //cout<<"mid"<<tmp->mId<<endl;
         //if(tmp==0) break;//
     }
-    if(tmp->mScore==score)
+    
+    if(tmp->mScore==mScore)
     {
-        while(tmp->mId<id)
+        cout<<"tes"<<endl;
+        while(tmp->mId<mId)
         {
             if(tmp==0) break;
-            if(tmp->mScore>score) break;
+            if(tmp->mScore>mScore) break;
             //if(tmp==cur[idx]) cur[idx]=cur[idx]->next;
             tmp=tmp->next;
         }
     }
     if(tmp==head[idx])
     {
-        node*t=head[idx];
-        //tmp->next=head[idx];
-        head[idx]=newnode;
-        newnode->next=t;
+        newnode->next=head[idx];
+        tmp->prev=newnode;
+        head[idx]=head[idx]->prev;
     }
     else
     {
-        if(tmp->next!=0)
-        {
-            //if(tmp==cur[idx]) cur[idx]=tmp->next;
-            newnode->next=tmp->next;
-            tmp->next=newnode;
-        }
-        else
-        {
-            //if(tmp==cur[idx]->next) cur[idx]=tmp->next;
-            tmp->next=newnode;
-        }
+        tmp->prev=newnode;
+        newnode->next=tmp;
+        newnode->prev->next=newnode;
     }
+    //tmp->prev=newnode;
+    //newnode->next=tmp;
+    //if(newnode->prev!=0) newnode->prev->next=newnode;
+
+
+    //newnode->next=tmp->next;
+    //newnode->prev=tmp;
+    //tmp->next=newnode;
+    //if(newnode->next!=0) newnode->next->prev=newnode;
     node*c=head[idx];
     while(c->next!=0)
     {
+        //if(c->mScore==big[idx]) break;
         c=c->next;
     }
     return c->mId;
@@ -205,6 +211,7 @@ int remove(int id)
         {
             del=head[i];
             head[i]=head[i]->next;
+            cout<<"head is "<<head[i]->mId<<endl;
             free(del);
             if(head[i]==0) return 0;
             else return head[i]->mId;
@@ -240,7 +247,7 @@ int query(int mGradeCnt, int mGrade[],int mGenderCnt, char mGender[][7], int mSc
         for(int j=0; j<mGradeCnt; j++)
         {
             int idx = retidx(mGrade[i],mGender[j][0]);
-            if(head[idx]->mScore<small && head[idx]->mScore>=mScore)
+            if(head[idx]!=0 && head[idx]->mScore<small && head[idx]->mScore>=mScore)
             {
                 small=head[idx]->mScore;
                 smallid=head[idx]->mId;
@@ -252,8 +259,23 @@ int query(int mGradeCnt, int mGrade[],int mGenderCnt, char mGender[][7], int mSc
 
 int main()
 {
-    char mgen[7]="female";
-    cout<<add(1236,1,mgen,100)<<endl;
+    /*
+    char mgen[7];
+    int id,grade, score;
+    for(int i=0; i<3; i++)
+    {
+        scanf("%d %d %s %d",&id, &grade, mgen,&score);
+        cout<<add(id,grade,mgen,score)<<endl;
+        cout<<"head "<<head[3]->mId<<endl;
+    }
+    int gradearr[3];
+    char genarr[2][7];
+    cout<<remove(300);
+
+    */
+    //scanf("%d %s %s",&gradearr[0],genarr[0],genarr[1]);
+    //cout<<query(1,gradearr,2,genarr,2200)<<endl;
+    /*
     cout<<add(1235,1,mgen,100)<<endl;
     cout<<add(1233,1,mgen,90)<<endl;
     cout<<add(1237,1,mgen,105)<<endl;
@@ -262,9 +284,16 @@ int main()
     cout<<head[1]->mId<<endl;
     cout<<head[1]->next->mId<<endl;
     //cout<<head[1]->next->next->mId<<endl;
-    if(head[1]->next->next==0) cout<<"tes";
     //cout<<head[1]->next->next->next->mId<<endl;
-    
+    */
+   char ctr[7]="female";
+   cout<<add(900,2,ctr,2500)<<endl;
+   cout<<add(300,2,ctr,2000)<<endl;
+   cout<<add(100,2,ctr,2500)<<endl;
+   cout<<endl;
+   cout<<head[3]->mId<<endl;
+   cout<<head[3]->next->mId<<endl;
+   cout<<head[3]->next->next->mId<<endl;
    return 0;
 
 }
