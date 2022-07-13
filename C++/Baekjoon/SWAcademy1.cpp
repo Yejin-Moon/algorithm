@@ -35,6 +35,8 @@ int main()
     cin>>T;
     for(int i=0; i<T; i++)
     {
+        maxval=1;
+        cnt=0;
         cin>>w;
         set<int> s;
         for(int j=0; j<w; j++)
