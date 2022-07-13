@@ -13,6 +13,7 @@ typedef struct node
 
 node*head[6]={0,0,0,0,0,0};
 int big[6]={0,0,0,0,0,0};
+node*cur[6]={0,0,0,0,0,0};
 
 int retidx(int mGrade, char mGender)
 {
@@ -43,20 +44,24 @@ int add(int mId, int mGrade, char mGender[7], int mScore) {
     if(head[idx]==0)
     {
         head[idx]=newnode;
-        //big[idx] = mScore;
+        cur[idx]=head[idx];
         return mId;
     }
-    //if(mScore>big[idx]) big[idx]=mScore;
     node*tmp = head[idx];
     while(1)
     {
-        if(tmp==0) break;
+        if(tmp==0) 
+        {
+            cur[idx]=tmp->prev;
+            break;
+        }
         if(tmp->mScore<mScore) 
         {
             if(tmp->next==0)
             {
                 tmp->next=newnode;
                 newnode->prev=tmp;
+                cur[idx]=newnode;
                 return newnode->mId;
             }
             else tmp=tmp->next;
@@ -68,7 +73,11 @@ int add(int mId, int mGrade, char mGender[7], int mScore) {
     {
         while(tmp->mId<mId)
         {
-            if(tmp==0) break;
+            if(tmp==0) 
+            {
+                cur[idx]=tmp->prev;
+                break;
+            }
             if(tmp->mScore!=mScore) break;
             else tmp=tmp->next;
         }
@@ -85,12 +94,20 @@ int add(int mId, int mGrade, char mGender[7], int mScore) {
         newnode->prev=tmp->prev;
         tmp->prev=newnode;
         newnode->next=tmp;
+        if(tmp->next==0) cur[idx]=tmp;
     }
-    
+    /*
     node*c=head[idx];
     while(c->next!=0)
     {
         c=c->next;
+    }
+    */
+    node*c=cur[idx];
+    while(c!=0)
+    {
+        if(c->mScore<cur[idx]->mScore) break;
+        c=c->prev;
     }
     return c->mId;
 }
@@ -172,7 +189,7 @@ int main()
 {
     char mgen[7];
     int id,grade, score;
-    for(int i=0; i<2; i++)
+    for(int i=0; i<7; i++)
     {
         scanf("%d %d %s %d",&id, &grade, mgen,&score);
         cout<<add(id,grade,mgen,score)<<endl;
