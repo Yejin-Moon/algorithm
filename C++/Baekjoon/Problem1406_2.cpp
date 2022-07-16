@@ -10,7 +10,6 @@ typedef struct node
 }node;
 node*head = 0;
 node*cur = 0;
-bool flag=false;
 
 void add(char c)
 {
@@ -18,67 +17,58 @@ void add(char c)
     newnode->i=c;
     newnode->next=newnode->prev=0;
 
-    if(flag)
+    if(head->next==0)
     {
-        head->prev=newnode;
-        newnode->next=head;
-        head=head->prev;
-        cur=head;
-        flag=false;
-        return;
-    }
-    if(head==0)
-    {
-        head=newnode;
+        head->next=newnode;
+        newnode->prev=head;
         cur=newnode;
-        return;
     }
-
-    if(cur->next!=0) cur->next->prev=newnode;
-    newnode->next=cur->next;
-    newnode->prev=cur;
-    cur->next=newnode;
-    cur=newnode;
+    else if(cur->next==0)
+    {
+        newnode->prev=cur;
+        cur->next=newnode;
+        cur=newnode;
+    }
+    else if(cur->next!=0)
+    {
+        cur->next->prev=newnode;
+        newnode->next=cur->next;
+        newnode->prev=cur;
+        cur->next=newnode;
+        cur=newnode;
+    }
 }
 
 void Left()
 {
-    if(cur==head) 
-    {
-        flag=true;
-        return;
-    }
-    cur=cur->prev;
+    if(cur->prev!=0) cur=cur->prev;
 }
 
 void Right()
 {
-    if(cur->next==0) return;
-    cur=cur->next;
+    if(cur->next!=0) cur=cur->next;
 }
 
 void delnode()
 {
     node*del = cur;
-    if(flag) return;
-    if(del==0) return;
-    if(del==head)
+    
+    if(del!=head)
     {
-        head=head->next;
-        head->prev=0;
-        free(del);
-        cur=head;
-        return;
+        del->prev->next=del->next;
+        if(del->next!=0) 
+        {
+            del->next->prev=del->prev;
+            free(del);
+        }
+        else cur->next=0;
+        cur=cur->prev;
     }
-    cur=cur->prev;
-    del->prev=del->next;
-    if(del->next!=0) del->next->prev=del->prev;
-    free(del);
 }
 
 void printstring()
 {
-    node*tmp=head;
+    node*tmp=head->next;
     while(tmp!=0)
     {
         cout<<tmp->i;
@@ -88,6 +78,8 @@ void printstring()
 
 int main()
 {
+    head = (node*)malloc(sizeof(node));
+    head->next=head->prev=0;
     string s;
     cin>>s;
     int len=s.length();
