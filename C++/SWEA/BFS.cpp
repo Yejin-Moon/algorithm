@@ -31,14 +31,15 @@ static int test_bfs() {
 	}
 	return score;
 }
-/*
+
 bool visit[11][11];
 int rmap[11][11];
-int dx[4] = {1,0,-1,0};
-int dy[4] = {0,1,0,-1};
+int dy[4] = {1,0,-1,0};
+int dx[4] = {0,1,0,-1};
 int cnt=0;
 int msize;
 int rcnt;
+int res=-1;
 
 void bfs_init(int map_size, int map[10][10]) {
     for(int i=0; i<map_size; i++)
@@ -54,9 +55,9 @@ void bfs_init(int map_size, int map[10][10]) {
 
 void binit()
 {
-    for(int i=1; i<msize; i++)
+    for(int i=1; i<11; i++)
     {
-        for(int j=1; j<msize; j++)
+        for(int j=1; j<11; j++)
         {
             visit[i][j]=false;
         }
@@ -64,40 +65,46 @@ void binit()
     cnt=0;
 }
 int bfs(int x1, int y1, int x2, int y2) {
-    visit[x1][y1]=true;
+    visit[y1][x1]=true;
+	cnt++;
     for(int i=0; i<4; i++)
     {
         int rx = x1+dx[i];
         int ry = y1+dy[i];
 		//printf("rx is : %d, ry is : %d\n",rx,ry);
 		
-		if(rx==x2 && ry==y2) 
+		/*
+		if(res==-1 && rx==x2 && ry==y2) 
 		{
-			printf("TTes %d",cnt+1);
-			return cnt+1;
+			printf("TTes %d",cnt);
+			res=cnt;
+			return res;
 		}
-		
+		*/
         if(rx>10 || rx<1 || ry>10 || ry<1) continue;
-        if(!visit[rx][ry]&&rmap[rx][ry]==0)
+		//printf("visited : %d, rmap: %d\n",visit[rx][ry],rmap[rx][ry]);
+        if(!visit[ry][rx]&&rmap[ry][rx]==0)
         {
 			printf("rx is : %d, ry is : %d\n",rx,ry);
-            cnt++;
-            visit[rx][ry]=true;
+			//printf("x2y2: %d %d\n",x2,y2);
+            //cnt++;
+            //visit[rx][ry]=true;
             if(rx==x2 && ry==y2)
             {
                 //rcnt=cnt;
 				printf("\nrecnt is : %d ",cnt);
                 //binit();
-				break;
+				//break;
+				if(res==-1) res=cnt;
                 return cnt;
             }
-            bfs(rx,ry,x2,y2);
+            else bfs(rx,ry,x2,y2);
         }
     }
-    return -1;
+    return res;
 }
-*/
 
+/*
 int x[11], y[11], dist[110];
 int rmap[11][11], cnt=0;
 void push(int xx, int yy, int di)
@@ -152,7 +159,7 @@ int bfs(int x1, int y1, int x2, int y2) {
     if(x[pos]==x2&&y[pos]==y2) return dist[pos];
     return -1;
 }
-
+*/
 int main() {
 	//setbuf(stdout, NULL);
     int N;
@@ -166,8 +173,9 @@ int main() {
 	bfs_init(N, map);
 	int M;
 	int score = 100;
+	
 	scanf("%d", &M);
-	for (int i = 0; i < M; ++i) {
+	for (int i = 0; i < M; i++) {
 		int x1, y1, x2, y2;
 		scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
 		int result = bfs(x1, y1, x2, y2);
@@ -177,7 +185,7 @@ int main() {
 		if (result != dist) score = 0;
 	}
 
-	printf("#total score : %d\n", test_bfs());
-
+	printf("#total score : %d\n", score);
+	
 	return 0;
 }
