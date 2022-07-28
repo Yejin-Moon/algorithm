@@ -49,6 +49,7 @@ void addnode(int par, int chi)
             }
             else if(cur->data==chi)
             {
+                newnode->data=par;
                 if(cur->prev!=0)
                 {
                     cur->prev->next=newnode;
@@ -75,7 +76,7 @@ void addnode(int par, int chi)
 int main()
 {
     addnode(1,2);
-    addnode(1,3);
+    addnode(3,1);
     //cout<<nodes[0].data<<' ';
     cout<<nodes[0].next->data<<' ';
     cout<<nodes[0].next->next->data<<' ';

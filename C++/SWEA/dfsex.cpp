@@ -65,12 +65,12 @@ static void makeTree(int n) {
 		}
 		check[e] = true;
 		path[i][0] = p[e];
-        cout<<"path "<<i<<" 0 - "<<path[i][0]<<'\n';
+        //cout<<"path "<<i<<" 0 - "<<path[i][0]<<'\n';
 		path[i][1] = e;
-        cout<<"path "<<i<<" 1 - "<<path[i][1]<<'\n';
+        //cout<<"path "<<i<<" 1 - "<<path[i][1]<<'\n';
 	}
 }
-
+/*
 void addnode(int par, int chi)
 {
     bool flag=false;
@@ -104,7 +104,7 @@ void addnode(int par, int chi)
             }
             else if(cur->data==chi)
             {
-				newnode->data=chi;
+				newnode->data=par;
                 if(cur->prev!=0)
                 {
                     cur->prev->next=newnode;
@@ -134,6 +134,7 @@ void dfs_init(int N, int path[100][2])
     {
         addnode(path[i][0],path[i][1]);
     }
+	idx=0;
 }
 
 int dfs(int n)
@@ -156,6 +157,66 @@ int dfs(int n)
     }
 	return -1;
 }
+*/
+
+int map[100][5];
+bool visited[100];
+int flag=-1;
+void dfs_init(int N, int path[100][2])
+{
+    for(int i=0; i<100; i++)
+    {
+        for(int j=0; j<5; j++)
+        {
+            map[i][j]=0;
+        }
+    }
+    for(int i=0; i<N; i++)
+    {
+        if(map[path[i][0]][0]==0) map[path[i][0]][0]=path[i][1];
+        else
+        {
+        	for(int chi=0; chi<5; chi++)
+        	{
+            	if(map[path[i][0]][chi]==0) 
+            	{
+               		map[path[i][0]][chi]=path[i][1];
+                	break;
+            	}
+        	}
+        }
+    }
+	flag = -1;
+}
+
+void init()
+{
+	for(int i=0; i<100; i++) visited[i]=false;
+}
+
+int real_dfs(int node, int n)
+{
+	//printf("node is : %d\n",node);
+	visited[node] =true;
+	if(flag==-1 && node>n) 
+	{
+		flag=node;
+	}
+	for(int i=0; i<5; i++)
+	{
+		if(map[node][i]==0) return flag;
+		if(!visited[map[node][i]]) real_dfs(map[node][i],n);
+	}
+	return flag;
+}
+
+int dfs(int n)
+{
+	flag=-1;
+	init();
+	real_dfs(n,n);
+}
+
 
 int main()
 {
@@ -172,7 +233,7 @@ int main()
 
 		makeTree(n - 1);
 		dfs_init(n, path);
-
+		
 		bool check[MAX_K + 2] = { false };
 		int score = 100;
 		for (int i = 0; i < q; ++i) {
@@ -181,7 +242,7 @@ int main()
 			scanf("%d", &k);
 
 			ret = dfs(k);
-            printf("result is %d\n",ret);
+            //printf("result is %d\n",ret);
 			scanf("%d", &correct);
 
 			if (ret != correct)

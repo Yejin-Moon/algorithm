@@ -31,12 +31,85 @@ static int test_bfs() {
 	}
 	return score;
 }
-
-bool visited[11][11];
+/*
+bool visit[11][11];
 int rmap[11][11];
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
 int cnt=0;
+int msize;
+int rcnt;
+
+void bfs_init(int map_size, int map[10][10]) {
+    for(int i=0; i<map_size; i++)
+    {
+        for(int j=0; j<map_size; j++)
+        {
+            rmap[i+1][j+1] = map[i][j];
+            visit[i+1][j+1]=false;
+        }
+    }
+    msize = map_size;
+}
+
+void binit()
+{
+    for(int i=1; i<msize; i++)
+    {
+        for(int j=1; j<msize; j++)
+        {
+            visit[i][j]=false;
+        }
+    }
+    cnt=0;
+}
+int bfs(int x1, int y1, int x2, int y2) {
+    visit[x1][y1]=true;
+    for(int i=0; i<4; i++)
+    {
+        int rx = x1+dx[i];
+        int ry = y1+dy[i];
+		//printf("rx is : %d, ry is : %d\n",rx,ry);
+		
+		if(rx==x2 && ry==y2) 
+		{
+			printf("TTes %d",cnt+1);
+			return cnt+1;
+		}
+		
+        if(rx>10 || rx<1 || ry>10 || ry<1) continue;
+        if(!visit[rx][ry]&&rmap[rx][ry]==0)
+        {
+			printf("rx is : %d, ry is : %d\n",rx,ry);
+            cnt++;
+            visit[rx][ry]=true;
+            if(rx==x2 && ry==y2)
+            {
+                //rcnt=cnt;
+				printf("\nrecnt is : %d ",cnt);
+                //binit();
+				break;
+                return cnt;
+            }
+            bfs(rx,ry,x2,y2);
+        }
+    }
+    return -1;
+}
+*/
+
+int x[11], y[11], dist[110];
+int rmap[11][11], cnt=0;
+void push(int xx, int yy, int di)
+{
+ 	x[cnt]=xx;
+    y[cnt]=yy;
+    dist[cnt]=di;
+    cnt++;
+}
+
+int dx[4] = {1,0,-1,0};
+int dy[4] = {0,1,0,-1};
 
 void bfs_init(int map_size, int map[10][10]) {
     for(int i=0; i<map_size; i++)
@@ -47,38 +120,36 @@ void bfs_init(int map_size, int map[10][10]) {
         }
     }
 }
-
-void init()
-{
-    for(int i=0; i<=10; i++)
-    {
-        for(int j=0; j<=10; j++)
-        {
-            visited[i][j]=false;
-        }
-    }
-    cnt=0;
-}
 int bfs(int x1, int y1, int x2, int y2) {
-    visited[x1][y1]=true;
-    for(int i=0; i<4; i++)
+    int pos;
+    x[x1]=0;
+    y[y1]=0;
+    dist[0]=1;
+    pos=0;
+    cnt=1;
+    
+    while(pos<cnt && (x[pos]!=x2||y[pos]!=y2))
     {
-        int rx = x1+dx[i];
-        int ry = y1+dy[i];
-        if(rx>10 || rx<1 || ry>10 || ry<1) continue;
-        if(!visited[rx][ry]&&rmap[rx][ry]==0)
+        if(y[pos]>0 && rmap[y[pos]-1][x[pos]]==0)
         {
-            cnt++;
-            //visited[rx][ry]=true;
-            if(rx==x2 && ry==y2)
-            {
-                int rcnt=cnt;
-                init();
-                return rcnt;
-            }
-            bfs(rx,ry,x2,y2);
+         	push(x[pos],y[pos]-1,dist[pos]+1);   
         }
+        if(x[pos]>0&&rmap[y[pos]][x[pos]-1]==0)
+        {
+         	push(x[pos]-1, y[pos], dist[pos]+1);   
+        }
+        if(y[pos]<y2&&rmap[y[pos+1]][x[pos]]==1)
+        {
+         	push(x[pos], y[pos]+1, dist[pos]+1);   
+        }
+        if(x[pos]<x2&&rmap[y[pos]][x[pos]+1]==1)
+        {
+         	push(x[pos]+1, y[pos], dist[pos]+1);   
+        }
+        pos++;
+        
     }
+    if(x[pos]==x2&&y[pos]==y2) return dist[pos];
     return -1;
 }
 
