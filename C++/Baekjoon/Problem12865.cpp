@@ -9,7 +9,7 @@ int maxval(int a, int b)
 
 int main()
 {
-    int P[101][100001];
+    int P[101][101];
     int weight[101];
     int value[101];
     int N,K;
@@ -27,5 +27,12 @@ int main()
             else P[i][j]=maxval(value[i]+P[i-1][j-weight[i]],P[i-1][j]);
         }
     }
-    cout<<P[N][K];
+    for(int i=1; i<=N; i++)
+    {
+        for(int j=1; j<=K; j++)
+        {
+            cout<<P[i][j]<<' ';
+        }
+        cout<<endl;
+    }
 }
