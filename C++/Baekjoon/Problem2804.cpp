@@ -6,7 +6,7 @@ char arr[26];
 int main()
 {
     char cross;
-    int bidx=100;
+    int bidx=100, ridx=0;
     char strA[31];
     char strB[31];
     scanf("%s %s",strA,strB);
@@ -19,17 +19,15 @@ int main()
             {
                 if(strA[j]==strB[i]) 
                 {
-                    bidx=i;
-                    cross=strB[i];
-                    break;
-                    /*
+                    
                     if(bidx>j)
                     {
                         bidx=j;
-                        cross=strB[i];
+                        cross=strA[j];
+                        ridx = i;
                         break;
                     }
-                    */
+                    
                 }
             }
         }
@@ -43,12 +41,11 @@ int main()
             break;
         }
     }
-
     for(int i=0; strB[i]!=0; i++)
     {
         for(int j=0; strA[j]!=0; j++)
         {
-            if(i!=bidx)
+            if(i!=ridx)
             {
                 if(j!=idx) printf(".");
                 else printf("%c",strB[i]);
