@@ -13,10 +13,8 @@ int main()
     }
     for(int i=0; i<n; i++)
     {
-        if(arr[i]%30!=0) y+=((arr[i]/30))+1;
-        else y+=(arr[i]/30);
-        if(arr[i]%60!=0) m+=((arr[i]/60))+1;
-        else m+=(arr[i]/60);
+        y+=((arr[i]/30))+1;
+        m+=((arr[i]/60))+1;
     }
     y=y*10;
     m=m*15;
