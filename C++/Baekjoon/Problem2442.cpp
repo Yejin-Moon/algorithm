@@ -16,10 +16,6 @@ int main()
         {
             cout<<"*";
         }
-        for(int j=0; j<n-i; j++)
-        {
-            cout<<" ";
-        }
         tmp+=2;
         cout<<"\n";
     }
