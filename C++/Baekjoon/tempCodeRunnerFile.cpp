@@ -1,17 +1,16 @@
 #include <iostream>
 using namespace std;
+int arr[10002];
 
 int main()
 {
-    int A,B,C;
-    cin>>A>>B>>C;
-
-    int h=C/60;
-    int m=C%60;
-
-    int rh = (A+h)%23;
-    rh+=(B+m)/60;
-    int rm = (B+m)%60;
-
-    cout<<rh<<" "<<rm;
+    int n;
+    cin>>n;
+    arr[0]=0;
+    arr[1]=1;
+    for(int i=2; i<=n; i++)
+    {
+        arr[i]=arr[i-1]+arr[i-2];
+    }
+    cout<<arr[n];
 }
