@@ -13,11 +13,11 @@ int main()
     }
     int x;
     scanf("%d",&x);
-    sort(arr,arr+n);
+    sort(arr, arr+n);
     for(int i=0; i<n-1; i++)
     {
         if(arr[i]+arr[i+1]>x) break;
-        for(int j=i+1;j<n;j++)
+        for(int j=i+1; j<n; j++)
         {
             if(arr[i]+arr[j]==x) 
             {
