@@ -21,10 +21,10 @@ int main()
             if(res<0 && a<0 && a<min-res) flag-=1;
             res+=a;
         }
+        if(flag<0) cout<<"-\n";
+        else if(flag>0) cout<<"+\n";
+        else if(res==0) cout<<"0\n";
+        else if(res<0) cout<<"-\n";
+        else if(res>0) cout<<"+\n";
     }
-    if(flag<0) cout<<"-\n";
-    else if(flag>0) cout<<"+\n";
-    else if(res==0) cout<<"0\n";
-    else if(res<0) cout<<"-\n";
-    else if(res>0) cout<<"+\n";
 }
