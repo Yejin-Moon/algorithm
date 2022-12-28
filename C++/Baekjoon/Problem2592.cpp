@@ -13,7 +13,7 @@ int main()
         v.push_back(a);
     }
     sort(v.begin(),v.end());
-    int frenum=0, frecnt=1, cnt=1, sum=0;
+    int frenum=v[0], frecnt=1, cnt=1, sum=0;
 
     for(int i=0; i<9; i++)
     {
