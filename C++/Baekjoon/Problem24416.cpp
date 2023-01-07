@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int reccnt=1, dpcnt=1;
+int reccnt=1, dpcnt=0;
 int arr[50];
 
 int recfib(int n)
@@ -16,7 +16,7 @@ int recfib(int n)
 
 int dpfib(int n)
 {
-    for(int i=2; i<=n; i++)
+    for(int i=3; i<=n; i++)
     {
         arr[i]=arr[i-1]+arr[i-2];
         dpcnt++;
@@ -26,8 +26,9 @@ int dpfib(int n)
 
 int main()
 {
-    arr[0]=1;
+    arr[0]=0;
     arr[1]=1;
+    arr[2]=1;
     int n;
     cin>>n;
     recfib(n);
