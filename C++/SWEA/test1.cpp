@@ -9,6 +9,7 @@ char map[100][100];
 int cnt[100][100];
 int alpha[26];
 int res=1;
+int biggest=0;
 
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
@@ -20,6 +21,7 @@ void init()
     memset(cnt,0,sizeof(cnt));
     memset(alpha,0,sizeof(alpha));
     res=1;
+    biggest=1;
 }
 
 void bfs(int x, int y)
@@ -45,6 +47,7 @@ void bfs(int x, int y)
             {
                 res++;
                 cnt[rx][ry]=cnt[x][y]+1;
+                if(cnt[rx][ry]>biggest) biggest=cnt[rx][ry];
                 visited[rx][ry]=true;
                 alpha[map[rx][ry]-'A']++;
                 q.push(make_pair(rx,ry));
@@ -72,7 +75,7 @@ int main(int argc, char** argv)
         	}
     	}
     	bfs(0,0);
-        printf("#%d %d\n",test_case,res);
+        printf("#%d %d\n",test_case,biggest);
 	}
 	return 0;
 }
