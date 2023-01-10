@@ -21,7 +21,7 @@ void init()
     memset(cnt,0,sizeof(cnt));
     memset(alpha,0,sizeof(alpha));
     res=1;
-    biggest=1;
+    biggest=1;  
 }
 
 void bfs(int x, int y)
@@ -41,7 +41,7 @@ void bfs(int x, int y)
             int rx = x+dx[i];
             int ry = y+dy[i];
             if(rx>=n || rx<0 || ry>=m || ry<0) continue;
-            if(alpha[map[rx][ry]-'A']!=0) continue;
+            //if(alpha[map[rx][ry]-'A']!=0) continue;
 
             if(!visited[rx][ry]&&alpha[map[rx][ry]-'A']==0)
             {
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
         	}
     	}
     	bfs(0,0);
-        printf("#%d %d\n",test_case,biggest);
+        printf("#%d %d\n",test_case,res);
 	}
 	return 0;
 }
