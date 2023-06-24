@@ -9,5 +9,6 @@ int main()
         int a;
         cin>>a;
         cout<<starr[i]-a<<" ";
+        
     }
 }
