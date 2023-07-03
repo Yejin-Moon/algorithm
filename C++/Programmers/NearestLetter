@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+int arr[27];
+vector<int> solution(string s) {
+    vector<int> answer;
+    int len = s.length();
+    for(int i=1; i<=len; i++) {
+        int idx = s[i-1]-'a';
+        if(arr[idx]==0) 
+        {
+            answer.push_back(-1);
+            arr[idx]=i;
+        }
+        else 
+        {
+            int tmp = arr[s[i-1]-'a'];
+            answer.push_back(i-tmp);
+            arr[idx]=i;
+        }
+        
+    }
+    return answer;
+}
