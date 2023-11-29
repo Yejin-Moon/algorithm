@@ -6,7 +6,7 @@ using namespace std;
 
 int inf = 987654321;
 
-vector<pair<int, int>> a[300001];
+vector<pair<int, int>> a[20001];
 int d[20001];
 
 void dijkstra(int start) {
