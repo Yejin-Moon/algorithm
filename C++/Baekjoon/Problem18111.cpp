@@ -32,7 +32,6 @@ int main() {
             time += remove * 2 + build;
 
             if (mintime >= time) {
-                if (height > h) continue;
                 mintime = time;
                 height = h;
             }
